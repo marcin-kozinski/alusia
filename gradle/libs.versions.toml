@@ -15,6 +15,17 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.0.0-alpha11" }
 
+[bundles]
+androidx-compose = [
+    "androidx-activity-compose",
+    "androidx-compose-ui",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-material3",
+]
+androidx-compose-debug = [
+    "androidx-compose-ui-tooling",
+    "androidx-compose-ui-test-manifest",
+]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
