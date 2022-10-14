@@ -1,0 +1,23 @@
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.dependency.analysis)
+}
+dependencyAnalysis {
+    dependencies {
+        bundle("androidx-compose-foundation") {
+            includeGroup("androidx.compose.foundation")
+        }
+        bundle("androidx-compose-ui") {
+            includeGroup("androidx.compose.ui")
+        }
+    }
+    issues {
+        all {
+            ignoreKtx(true)
+            onUnusedDependencies {
+                exclude('androidx.compose.ui:ui-tooling-preview')
+            }
+        }
+    }
+}
