@@ -68,7 +68,7 @@ fun MainScreen(
 ) {
     Scaffold(
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 title = { Text("Zgłoszenie nieobecności") }
             )
         }
