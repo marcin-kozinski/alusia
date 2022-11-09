@@ -96,8 +96,8 @@ fun MainScreen(
 
             Box(
                 Modifier
-                    .clickable { onDateRangeFieldClick() }
                     .padding(horizontal = Spacing.Base)
+                    .clickable { onDateRangeFieldClick() }
             ) {
                 TextFieldDefaults.OutlinedTextFieldDecorationBox(
                     value = mainScreenState.displayRange,
