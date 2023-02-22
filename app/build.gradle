@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -17,6 +19,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -39,6 +42,17 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    testOptions {
+        managedDevices {
+            devices {
+                phone (ManagedVirtualDevice) {
+                    device = "Nexus One"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -52,4 +66,6 @@ dependencies {
 
     coreLibraryDesugaring libs.android.tools.desugaring
     debugRuntimeOnly libs.bundles.androidx.compose.debug
+
+    androidTestImplementation libs.bundles.androidx.test
 }
