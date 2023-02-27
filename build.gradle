@@ -17,6 +17,7 @@ dependencyAnalysis {
             ignoreKtx(true)
             onUnusedDependencies {
                 exclude('androidx.compose.ui:ui-tooling-preview')
+                exclude('androidx.test:runner')
             }
         }
     }
