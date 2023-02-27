@@ -19,8 +19,12 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-fragment = { module = "androidx.fragment:fragment", version = "1.5.3" }
+androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version = "2.5.1" }
+androidx-test-core = { module = "androidx.test:core", version = "1.5.0" }
 androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
 androidx-test-junit-ktx = { module = "androidx.test.ext:junit-ktx", version = "1.1.5" }
+
+junit = { module = "junit:junit", version = "4.13.2" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 
@@ -40,9 +44,12 @@ androidx-compose-debug = [
     "androidx-compose-ui-test-manifest",
 ]
 androidx-test = [
-    "androidx-test-runner",
-    "androidx-test-junit-ktx",
     "kotlin-test",
+    "junit",
+    "androidx-test-runner",
+    "androidx-test-core",
+    "androidx-test-junit-ktx",
+    "androidx-lifecycle-common",
 ]
 
 [plugins]
