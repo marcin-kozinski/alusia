@@ -28,7 +28,7 @@ junit = { module = "junit:junit", version = "4.13.2" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 
-material = { module = "com.google.android.material:material", version = "1.7.0" }
+material = { module = "com.google.android.material:material", version = "1.8.0" }
 
 [bundles]
 androidx-compose = [
