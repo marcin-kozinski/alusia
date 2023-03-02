@@ -7,5 +7,11 @@
   ],
   "configMigration": true,
   "semanticCommitScope": "dependencies",
-  "timezone": "CET"
+  "timezone": "CET",
+  "packageRules": [
+    {
+      "matchPackageNames": ["org.jetbrains.kotlin.android", "androidx.compose.compiler:compiler"],
+      "groupName": "Kotlin and Compose compiler"
+    }
+  ]
 }
