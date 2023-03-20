@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                         try {
                             startActivity(
                                 Intent(Intent.ACTION_SEND).apply {
-                                    type = "*/*"
+                                    type = "text/plain"
                                     putExtra(Intent.EXTRA_EMAIL, arrayOf("ps42@um.bialystok.pl"))
                                     putExtra(Intent.EXTRA_SUBJECT, "Nieobecność")
                                     putExtra(Intent.EXTRA_TEXT, it)
