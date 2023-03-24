@@ -1,7 +1,7 @@
 [versions]
 android-plugin = "7.4.2"
 androidx-activity = "1.6.1"
-androidx-compose-compiler = "1.4.3"
+androidx-compose-compiler = "1.4.4"
 
 [libraries]
 android-tools-desugaring = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.2" }
