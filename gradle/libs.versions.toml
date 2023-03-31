@@ -4,7 +4,7 @@ androidx-activity = "1.7.0"
 androidx-compose-compiler = "1.4.4"
 
 [libraries]
-android-tools-desugaring = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.2" }
+android-tools-desugaring = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.3" }
 
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.9.0" }
 androidx-appcompat-ktx = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
