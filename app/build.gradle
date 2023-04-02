@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "dev.kozinski.alusia"
-        minSdk 21
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -23,7 +23,6 @@ android {
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -64,7 +63,6 @@ dependencies {
     implementation libs.androidx.fragment
     implementation libs.material
 
-    coreLibraryDesugaring libs.android.tools.desugaring
     debugRuntimeOnly libs.bundles.androidx.compose.debug
 
     androidTestImplementation libs.bundles.androidx.test
