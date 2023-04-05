@@ -19,6 +19,9 @@ dependencyAnalysis {
                 exclude('androidx.compose.ui:ui-tooling-preview')
                 exclude('androidx.test:runner')
             }
+            onAny {
+                severity('fail')
+            }
         }
     }
 }
