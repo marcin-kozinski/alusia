@@ -19,6 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.util.component1
 import androidx.core.util.component2
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import dev.kozinski.alusia.ui.theme.AlusiaTheme
 import java.time.Clock
@@ -33,44 +36,49 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val clock = Clock.systemDefaultZone()
-            val mainScreenState = rememberMainScreenState(
-                start = LocalDate.now(clock).plusDays(1),
-                end = LocalDate.now(clock).plusDays(1)
-            )
             AlusiaTheme {
-                MainScreen(
-                    onDateRangeFieldClick = {
-                        MaterialDatePicker.Builder.dateRangePicker()
-                            .build()
-                            .apply {
-                                addOnPositiveButtonClickListener { (start, end) ->
-                                    mainScreenState.start = localDateOfEpochMilli(start)
-                                    mainScreenState.end = localDateOfEpochMilli(end)
+                val navController = rememberNavController()
+                NavHost(navController, startDestination = "report-absence") {
+                    composable("report-absence") {
+                        val clock = Clock.systemDefaultZone()
+                        val mainScreenState = rememberMainScreenState(
+                            start = LocalDate.now(clock).plusDays(1),
+                            end = LocalDate.now(clock).plusDays(1)
+                        )
+                        MainScreen(
+                            onDateRangeFieldClick = {
+                                MaterialDatePicker.Builder.dateRangePicker()
+                                    .build()
+                                    .apply {
+                                        addOnPositiveButtonClickListener { (start, end) ->
+                                            mainScreenState.start = localDateOfEpochMilli(start)
+                                            mainScreenState.end = localDateOfEpochMilli(end)
+                                        }
+                                        show(supportFragmentManager, null)
+                                    }
+                            },
+                            onSendClick = {
+                                try {
+                                    startActivity(
+                                        Intent(Intent.ACTION_SEND).apply {
+                                            type = "text/plain"
+                                            putExtra(Intent.EXTRA_EMAIL, arrayOf("ps42@um.bialystok.pl"))
+                                            putExtra(Intent.EXTRA_SUBJECT, "Nieobecność")
+                                            putExtra(Intent.EXTRA_TEXT, it)
+                                        }
+                                    )
+                                } catch (e: ActivityNotFoundException) {
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "Nie udało się otworzyć aplikacji email",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                                show(supportFragmentManager, null)
-                            }
-                    },
-                    onSendClick = {
-                        try {
-                            startActivity(
-                                Intent(Intent.ACTION_SEND).apply {
-                                    type = "text/plain"
-                                    putExtra(Intent.EXTRA_EMAIL, arrayOf("ps42@um.bialystok.pl"))
-                                    putExtra(Intent.EXTRA_SUBJECT, "Nieobecność")
-                                    putExtra(Intent.EXTRA_TEXT, it)
-                                }
-                            )
-                        } catch (e: ActivityNotFoundException) {
-                            Toast.makeText(
-                                this,
-                                "Nie udało się otworzyć aplikacji email",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    },
-                    mainScreenState = mainScreenState,
-                )
+                            },
+                            mainScreenState = mainScreenState,
+                        )
+                    }
+                }
             }
         }
     }
