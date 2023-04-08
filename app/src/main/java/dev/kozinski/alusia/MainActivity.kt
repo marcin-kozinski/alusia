@@ -10,6 +10,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,12 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.util.component1
-import androidx.core.util.component2
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.android.material.datepicker.MaterialDatePicker
 import dev.kozinski.alusia.ui.theme.AlusiaTheme
 import java.time.Clock
 import java.time.Instant
@@ -37,25 +36,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AlusiaTheme {
+                val clock = Clock.systemDefaultZone()
+                val absenceState = rememberAbsenceState(
+                    start = LocalDate.now(clock).plusDays(1),
+                )
+
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "report-absence") {
                     composable("report-absence") {
-                        val clock = Clock.systemDefaultZone()
-                        val mainScreenState = rememberMainScreenState(
-                            start = LocalDate.now(clock).plusDays(1),
-                            end = LocalDate.now(clock).plusDays(1)
-                        )
-                        MainScreen(
+                        ReportAbsenceScreen(
+                            absenceState = absenceState,
                             onDateRangeFieldClick = {
-                                MaterialDatePicker.Builder.dateRangePicker()
-                                    .build()
-                                    .apply {
-                                        addOnPositiveButtonClickListener { (start, end) ->
-                                            mainScreenState.start = localDateOfEpochMilli(start)
-                                            mainScreenState.end = localDateOfEpochMilli(end)
-                                        }
-                                        show(supportFragmentManager, null)
-                                    }
+                                navController.navigate("report-absence/dates")
                             },
                             onSendClick = {
                                 try {
@@ -75,7 +67,18 @@ class MainActivity : AppCompatActivity() {
                                     ).show()
                                 }
                             },
-                            mainScreenState = mainScreenState,
+                        )
+                    }
+                    composable("report-absence/dates") {
+                        DateRangePicker(
+                            onDismiss = { navController.navigateUp() },
+                            onConfirmed = { start, end ->
+                                absenceState.start = start.toLocalDate()
+                                absenceState.end = end.toLocalDate()
+                                navController.navigateUp()
+                            },
+                            initialSelectedStartDate = absenceState.start,
+                            initialSelectedEndDate = absenceState.end,
                         )
                     }
                 }
@@ -85,10 +88,10 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun MainScreen(
+fun ReportAbsenceScreen(
+    absenceState: AbsenceState,
     onDateRangeFieldClick: () -> Unit,
     onSendClick: (String) -> Unit,
-    mainScreenState: MainScreenState,
 ) {
     Scaffold(
         topBar = {
@@ -105,11 +108,11 @@ fun MainScreen(
             Box(
                 Modifier
                     .padding(horizontal = Spacing.Base)
-                    .clickable { onDateRangeFieldClick() }
+                    .clickable(onClick = onDateRangeFieldClick)
             ) {
                 TextFieldDefaults.OutlinedTextFieldDecorationBox(
-                    value = mainScreenState.displayRange,
-                    innerTextField = { Text(text = mainScreenState.displayRange) },
+                    value = absenceState.displayRange,
+                    innerTextField = { Text(text = absenceState.displayRange) },
                     enabled = true,
                     singleLine = true,
                     visualTransformation = VisualTransformation.None,
@@ -128,7 +131,7 @@ fun MainScreen(
 
             Spacer(Modifier.height(Spacing.Base / 2))
 
-            val emailBody = composeEmail(mainScreenState.start, mainScreenState.end)
+            val emailBody = composeEmail(absenceState.start, absenceState.end)
             SelectionContainer {
                 Text(
                     text = emailBody,
@@ -151,7 +154,7 @@ fun MainScreen(
     }
 }
 
-class MainScreenState(
+class AbsenceState(
     start: LocalDate,
     end: LocalDate,
 ) {
@@ -161,11 +164,11 @@ class MainScreenState(
 }
 
 @Composable
-fun rememberMainScreenState(
+fun rememberAbsenceState(
     start: LocalDate,
-    end: LocalDate,
+    end: LocalDate = start,
 ) = remember(start, end) {
-    MainScreenState(start, end)
+    AbsenceState(start, end)
 }
 
 fun composeEmail(
@@ -198,15 +201,91 @@ fun composeEmail(
     showSystemUi = true
 )
 @Composable
-fun MainScreenPreview() {
+fun ReportAbsenceScreenPreview() {
     AlusiaTheme {
-        MainScreen(
-            onDateRangeFieldClick = { },
-            onSendClick = {},
-            mainScreenState = rememberMainScreenState(
+        ReportAbsenceScreen(
+            absenceState = rememberAbsenceState(
                 start = LocalDate.ofEpochDay(1),
-                end = LocalDate.ofEpochDay(1),
             ),
+            onDateRangeFieldClick = {},
+            onSendClick = {},
+        )
+    }
+}
+
+@Composable
+fun DateRangePicker(
+    onDismiss: () -> Unit,
+    onConfirmed: (Long, Long) -> Unit,
+    modifier: Modifier = Modifier,
+    initialSelectedStartDate: LocalDate? = null,
+    initialSelectedEndDate: LocalDate? = initialSelectedStartDate,
+) {
+    Surface {
+        val datePickerState = rememberDateRangePickerState(
+            initialSelectedStartDate?.toEpochMilli(),
+            initialSelectedEndDate?.toEpochMilli(),
+        )
+        Column(
+            modifier
+                .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+        ) {
+            Row(
+                Modifier
+                    .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top)),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                IconButton(onClick = onDismiss) {
+                    Icon(imageVector = Icons.Default.Close, contentDescription = "Anuluj")
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                TextButton(
+                    onClick = {
+                        onConfirmed(
+                            datePickerState.selectedStartDateMillis!!,
+                            datePickerState.selectedEndDateMillis!!,
+                        )
+                    },
+                    enabled = datePickerState.selectedStartDateMillis != null &&
+                            datePickerState.selectedEndDateMillis != null
+                ) {
+                    Text("OK")
+                }
+            }
+            val dateFormatter = remember { DatePickerFormatter() }
+            DateRangePicker(
+                state = datePickerState,
+                modifier = Modifier.weight(1f),
+                dateFormatter = dateFormatter,
+                headline = {
+                    ProvideTextStyle(value = MaterialTheme.typography.titleMedium) {
+                        DateRangePickerDefaults.DateRangePickerHeadline(
+                            datePickerState,
+                            dateFormatter,
+                            modifier = Modifier.padding(
+                                // Matching padding to the current implementation
+                                PaddingValues(
+                                    start = 64.dp,
+                                    end = 12.dp,
+                                    bottom = 12.dp
+                                )
+                            )
+                        )
+                    }
+                },
+            )
+        }
+    }
+}
+@Preview(
+    showSystemUi = true,
+)
+@Composable
+fun DateRangePickerPreview() {
+    AlusiaTheme {
+        DateRangePicker(
+            onDismiss = { },
+            onConfirmed = { _, _ -> }
         )
     }
 }
@@ -215,6 +294,10 @@ object Spacing {
     val Base @Composable get() = 16.dp
 }
 
-fun localDateOfEpochMilli(epochMilli: Long, offset: ZoneOffset = ZoneOffset.UTC): LocalDate {
-    return Instant.ofEpochMilli(epochMilli).atOffset(offset).toLocalDate()
+fun Long.toLocalDate(offset: ZoneOffset = ZoneOffset.UTC): LocalDate {
+    return Instant.ofEpochMilli(this).atOffset(offset).toLocalDate()
+}
+
+fun LocalDate.toEpochMilli(offset: ZoneOffset = ZoneOffset.UTC): Long {
+    return atTime(0, 0).toInstant(offset).toEpochMilli()
 }
