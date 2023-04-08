@@ -62,9 +62,8 @@ dependencies {
     implementation libs.androidx.lifecycle.viewmodel
     implementation platform(libs.androidx.compose.bom)
     implementation libs.bundles.androidx.compose
+    implementation libs.androidx.compose.material.icons
     implementation libs.bundles.androidx.compose.navigation
-    implementation libs.androidx.fragment
-    implementation libs.material
 
     debugRuntimeOnly libs.bundles.androidx.compose.debug
 
