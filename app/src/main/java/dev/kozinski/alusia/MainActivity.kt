@@ -110,7 +110,7 @@ fun ReportAbsenceScreen(
                     .padding(horizontal = Spacing.Base)
                     .clickable(onClick = onDateRangeFieldClick)
             ) {
-                TextFieldDefaults.OutlinedTextFieldDecorationBox(
+                OutlinedTextFieldDefaults.DecorationBox(
                     value = absenceState.displayRange,
                     innerTextField = { Text(text = absenceState.displayRange) },
                     enabled = true,
