@@ -1,5 +1,5 @@
 [versions]
-android-plugin = "7.4.2"
+android-plugin = "8.0.0"
 androidx-activity = "1.7.0"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.5.3"
