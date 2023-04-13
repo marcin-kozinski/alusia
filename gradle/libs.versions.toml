@@ -3,7 +3,7 @@ android-plugin = "7.4.2"
 androidx-activity = "1.7.0"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.5.3"
-androidx-compose-compiler = "1.4.4"
+androidx-compose-compiler = "1.4.5"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.10.0" }
@@ -61,5 +61,5 @@ androidx-test = [
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.8.10" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.8.20" }
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version = "1.19.0" }
