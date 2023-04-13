@@ -10,8 +10,8 @@
   "timezone": "CET",
   "packageRules": [
     {
-      "matchPackageNames": ["org.jetbrains.kotlin.android", "androidx.compose.compiler:compiler"],
-      "groupName": "Kotlin and Compose compiler"
+      "matchPackageNames": ["org.jetbrains.kotlin.android"],
+      "enabled": false
     }
   ]
 }
