@@ -2,6 +2,7 @@ package dev.kozinski.alusia
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
@@ -197,9 +198,7 @@ fun composeEmail(
     """.trimIndent()
 }
 
-@Preview(
-    showSystemUi = true
-)
+@DefaultPreviews
 @Composable
 fun ReportAbsenceScreenPreview() {
     AlusiaTheme {
@@ -277,9 +276,7 @@ fun DateRangePicker(
         }
     }
 }
-@Preview(
-    showSystemUi = true,
-)
+@DefaultPreviews
 @Composable
 fun DateRangePickerPreview() {
     AlusiaTheme {
@@ -301,3 +298,18 @@ fun Long.toLocalDate(offset: ZoneOffset = ZoneOffset.UTC): LocalDate {
 fun LocalDate.toEpochMilli(offset: ZoneOffset = ZoneOffset.UTC): Long {
     return atTime(0, 0).toInstant(offset).toEpochMilli()
 }
+
+@Preview(
+    name = "1. Light",
+    group = "System theme",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    name = "2. Dark",
+    group = "System theme",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+annotation class ThemePreviews
+
+@ThemePreviews
+annotation class DefaultPreviews
