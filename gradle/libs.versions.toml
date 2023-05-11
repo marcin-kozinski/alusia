@@ -6,7 +6,7 @@ androidx-navigation = "2.5.3"
 androidx-compose-compiler = "1.4.6"
 
 [libraries]
-androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.10.0" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.10.1" }
 androidx-appcompat-ktx = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
