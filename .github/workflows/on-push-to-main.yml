@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  release:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3.5.3
+    - name: Set up JDK
+      uses: actions/setup-java@v3.11.0
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        # Using 'temurin' speeds up the job, because this distribution is cached by the runner.
+        # See: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Hosted-Tool-Cache
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1.152.0
+      with:
+        bundler-cache: true # Run "bundle install", and cache the result.
+    - name: Validate Gradle wrapper
+      uses: gradle/wrapper-validation-action@v1.0.6
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2.4.2
+    - name: Decrypt secrets
+      env:
+        GPG_KEY: ${{ secrets.gpg_key }}
+      run: ./decrypt.sh
+      working-directory: ./secrets
+    - name: Build and upload release
+      env:
+        GRADLE_OPTS: -Dorg.gradle.daemon=false
+      run: ci/release-upload.sh
+    - name: Archive the release
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: apk
+        path: secrets/ps42.apk
+        if-no-files-found: error

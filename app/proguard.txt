@@ -1,0 +1,4 @@
+# Just minimize and let R8 do its optimizations, but leave original names. 
+-dontobfuscate
+# Write out more information during processing.
+-verbose
