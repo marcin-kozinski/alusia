@@ -1,0 +1,34 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Upload a new release"
+  lane :release do
+    # Switch to the root directory to run the release script.
+    # https://docs.fastlane.tools/advanced/fastlane/#directory-behavior
+    Dir.chdir("..") do
+      sh "ci/release-build.sh"
+    end
+
+    firebase_app_distribution(
+      app: "1:404017888856:android:5101a794f1672b51afd42d",
+      service_credentials_file: "secrets/alusia-niezapominajka-a262eaffa2b9.json",
+      android_artifact_path: "secrets/ps42.apk",
+      groups: "Testers"
+    )
+  end
+end
