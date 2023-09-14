@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3.5.3
+      uses: actions/checkout@v3.6.0
     - name: Set up JDK
       uses: actions/setup-java@v3.11.0
       with:
