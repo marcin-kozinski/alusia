@@ -68,7 +68,6 @@ dependencies {
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat.ktx
     implementation libs.androidx.activity.ktx
-    implementation libs.androidx.lifecycle.common
     implementation libs.androidx.lifecycle.viewmodel
     implementation platform(libs.androidx.compose.bom)
     implementation libs.bundles.androidx.compose
@@ -78,4 +77,5 @@ dependencies {
     debugRuntimeOnly libs.bundles.androidx.compose.debug
 
     androidTestImplementation libs.bundles.androidx.test
+    androidTestImplementation libs.androidx.lifecycle.common
 }
