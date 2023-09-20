@@ -5,18 +5,27 @@ plugins {
 }
 dependencyAnalysis {
     dependencies {
-        bundle("androidx-compose-foundation") {
-            includeGroup("androidx.compose.foundation")
+        bundle('androidx-compose-foundation') {
+            primary('androidx.compose.foundation:foundation-android')
+            includeDependency('androidx.compose.foundation:foundation-android')
+            includeDependency('androidx.compose.foundation:foundation-layout-android')
         }
-        bundle("androidx-compose-ui") {
-            includeGroup("androidx.compose.ui")
+        bundle('androidx-compose-ui') {
+            primary('androidx.compose.ui:ui-android')
+            includeDependency('androidx.compose.ui:ui-android')
+            includeDependency('androidx.compose.ui:ui-graphics-android')
+            includeDependency('androidx.compose.ui:ui-text-android')
+            includeDependency('androidx.compose.ui:ui-tooling-preview-android')
+            includeDependency('androidx.compose.ui:ui-unit-android')
+        }
+        bundle('kotlin-test') {
+            includeDependency('org.jetbrains.kotlin:kotlin-test')
         }
     }
     issues {
         all {
             ignoreKtx(true)
             onUnusedDependencies {
-                exclude('androidx.compose.ui:ui-tooling-preview')
                 exclude('androidx.test:runner')
             }
             onAny {

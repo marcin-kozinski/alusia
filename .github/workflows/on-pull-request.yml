@@ -61,4 +61,4 @@ jobs:
         if: failure() && steps.build-health.outcome == 'failure'
         run: |
           echo "### Build health report" >> $GITHUB_STEP_SUMMARY
-          cat "build/reports/dependency-analysis/build-health-report.txt" >> $GITHUB_STEP_SUMMARY
+          cat "build/reports/dependency-analysis/build-health-report.txt" | tee -a $GITHUB_STEP_SUMMARY
