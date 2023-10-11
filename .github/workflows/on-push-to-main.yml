@@ -21,7 +21,7 @@ jobs:
         # Using 'temurin' speeds up the job, because this distribution is cached by the runner.
         # See: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Hosted-Tool-Cache
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.152.0
+      uses: ruby/setup-ruby@v1.155.0
       with:
         bundler-cache: true # Run "bundle install", and cache the result.
     - name: Validate Gradle wrapper
