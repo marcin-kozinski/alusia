@@ -3,7 +3,7 @@ android-plugin = "8.2.0"
 androidx-activity = "1.8.0"
 androidx-lifecycle = "2.6.2"
 androidx-navigation = "2.7.5"
-androidx-compose-compiler = "1.5.3"
+androidx-compose-compiler = "1.5.7"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.12.0" }
