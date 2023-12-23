@@ -56,7 +56,6 @@ androidx-compose-navigation = [
 androidx-test = [
     "kotlin-test",
     "junit",
-    "androidx-test-runner",
     "androidx-test-core",
     "androidx-test-junit-ktx",
 ]

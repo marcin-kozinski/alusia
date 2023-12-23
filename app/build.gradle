@@ -76,6 +76,7 @@ dependencies {
 
     debugRuntimeOnly libs.bundles.androidx.compose.debug
 
+    androidTestRuntimeOnly libs.androidx.test.runner
     androidTestImplementation libs.bundles.androidx.test
     androidTestImplementation libs.androidx.lifecycle.common
 }
