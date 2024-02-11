@@ -25,7 +25,7 @@ jobs:
       with:
         bundler-cache: true # Run "bundle install", and cache the result.
     - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@v2.1.0
+      uses: gradle/wrapper-validation-action@v2.1.1
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2.11.1
     - name: Decrypt secrets
