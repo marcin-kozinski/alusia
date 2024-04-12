@@ -80,3 +80,13 @@ dependencies {
     androidTestImplementation libs.bundles.androidx.test
     androidTestImplementation libs.androidx.lifecycle.common
 }
+
+tasks.register("outputBuildToolsVersion") {
+    doFirst {
+        def get = layout.buildDirectory.dir("outputs/versions").get()
+        def file = get.file("build-tools").asFile
+        file.parentFile.mkdirs()
+        file.createNewFile()
+        file.write(android.buildToolsVersion)
+    }
+}
