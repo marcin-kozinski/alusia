@@ -8,8 +8,6 @@ UNSIGNED_APK="$BUILD_OUTPUT_DIR/app-release-unsigned.apk"
 ALIGNED_APK="$BUILD_OUTPUT_DIR/app-release-unsigned-aligned.apk"
 SIGNED_APK="secrets/ps42.apk"
 
-BUILD_TOOLS_DIR="$ANDROID_HOME/build-tools/30.0.3"
-
 if [[ -z "$ANDROID_HOME" ]]; then
   echo "ANDROID_HOME not set"
   exit 1
@@ -27,7 +25,9 @@ echo "Initializing secrets…"
 source "secrets/secret-environment-variables.sh"
 
 echo "Building…"
-./gradlew clean :app:assembleRelease
+./gradlew clean :app:assembleRelease :app:outputBuildToolsVersion
+# Use the same build tools as the gradle build, thanks to outputBuildToolsVersion task
+BUILD_TOOLS_DIR="$ANDROID_HOME/build-tools/$(cat app/build/outputs/versions/build-tools)"
 
 echo "Aligning…"
 "$BUILD_TOOLS_DIR/zipalign" -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
