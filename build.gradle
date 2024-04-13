@@ -4,7 +4,8 @@ plugins {
     alias(libs.plugins.dependency.analysis)
 }
 dependencyAnalysis {
-    dependencies {
+    structure {
+        ignoreKtx(true)
         bundle('androidx-compose-foundation') {
             primary('androidx.compose.foundation:foundation')
             includeDependency('androidx.compose.foundation:foundation')
@@ -26,7 +27,6 @@ dependencyAnalysis {
     }
     issues {
         all {
-            ignoreKtx(true)
             onUnusedDependencies {
                 exclude('androidx.test:runner')
             }
