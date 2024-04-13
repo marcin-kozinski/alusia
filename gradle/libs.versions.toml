@@ -63,4 +63,4 @@ androidx-test = [
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.23" }
-dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version = "1.28.0" }
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version = "1.31.0" }
