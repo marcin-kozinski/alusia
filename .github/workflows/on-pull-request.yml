@@ -19,20 +19,16 @@ jobs:
         cache: gradle
     - name: Accept Android SDK licenses
       run: yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
-    - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@v2.1.3
     - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2.11.1
+      uses: gradle/actions/setup-gradle@v3.3.0
+      with:
+        validate-wrappers: true
     - name: Build the app
-      uses: gradle/gradle-build-action@v2.11.1
-      with:
-        arguments: :app:assembleDebug
+      run: ./gradlew :app:assembleDebug
     - name: Run tests
-      uses: gradle/gradle-build-action@v2.11.1
-      with:
-        arguments: |
-          :app:phoneDebugAndroidTest
-          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+      run: |
+        ./gradlew :app:phoneDebugAndroidTest \
+          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
 
   build-health:
 
@@ -48,15 +44,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v2.1.3
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.11.1
+        uses: gradle/actions/setup-gradle@v3.3.0
+        with:
+          validate-wrappers: true
       - name: Verify build health
         id: build-health
-        uses: gradle/gradle-build-action@v2.11.1
-        with:
-          arguments: :buildHealth
+        run: ./gradlew :buildHealth
       - name: Build health report
         if: failure() && steps.build-health.outcome == 'failure'
         run: |
