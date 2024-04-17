@@ -251,27 +251,9 @@ fun DateRangePicker(
                     Text("OK")
                 }
             }
-            val dateFormatter = remember { DatePickerFormatter() }
             DateRangePicker(
                 state = datePickerState,
                 modifier = Modifier.weight(1f),
-                dateFormatter = dateFormatter,
-                headline = {
-                    ProvideTextStyle(value = MaterialTheme.typography.titleMedium) {
-                        DateRangePickerDefaults.DateRangePickerHeadline(
-                            datePickerState,
-                            dateFormatter,
-                            modifier = Modifier.padding(
-                                // Matching padding to the current implementation
-                                PaddingValues(
-                                    start = 64.dp,
-                                    end = 12.dp,
-                                    bottom = 12.dp
-                                )
-                            )
-                        )
-                    }
-                },
             )
         }
     }
@@ -282,7 +264,9 @@ fun DateRangePickerPreview() {
     AlusiaTheme {
         DateRangePicker(
             onDismiss = { },
-            onConfirmed = { _, _ -> }
+            onConfirmed = { _, _ -> },
+            initialSelectedStartDate = LocalDate.of(2025, 6, 13),
+            initialSelectedEndDate = LocalDate.of(2025, 7, 17),
         )
     }
 }
