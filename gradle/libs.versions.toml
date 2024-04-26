@@ -1,7 +1,6 @@
 [versions]
 android-plugin = "8.3.2"
 androidx-activity = "1.9.0"
-androidx-lifecycle = "2.7.0"
 androidx-navigation = "2.7.7"
 androidx-compose-compiler = "1.5.12"
 
@@ -21,8 +20,7 @@ androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-mani
 androidx-compose-animation = { module = "androidx.compose.animation:animation-android" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-core-android" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
-androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version = "+" } # Only used in UI tests, + lets it just match the version the main APK uses transitively.
 androidx-navigation-common = { module = "androidx.navigation:navigation-common", version.ref = "androidx-navigation" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 androidx-navigation-runtime = { module = "androidx.navigation:navigation-runtime", version.ref = "androidx-navigation" }
