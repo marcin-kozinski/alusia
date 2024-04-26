@@ -20,7 +20,7 @@ jobs:
     - name: Accept Android SDK licenses
       run: yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3.3.1
+      uses: gradle/actions/setup-gradle@v3.3.2
       with:
         validate-wrappers: true
     - name: Build the app
@@ -45,7 +45,7 @@ jobs:
           # Using 'temurin' speeds up the job, because this distribution is cached by the runner.
           # See: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Hosted-Tool-Cache
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.3.1
+        uses: gradle/actions/setup-gradle@v3.3.2
         with:
           validate-wrappers: true
       - name: Verify build health
