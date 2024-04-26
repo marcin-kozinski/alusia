@@ -15,9 +15,8 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4.2.0
       with:
-        java-version: '17'
+        java-version-file: '.java-version'
         distribution: 'temurin'
-        cache: gradle
         # Using 'temurin' speeds up the job, because this distribution is cached by the runner.
         # See: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Hosted-Tool-Cache
     - name: Set up Ruby
