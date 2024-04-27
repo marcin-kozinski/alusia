@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     "schedule:daily",
-    ":prHourlyLimitNone"
+    ":prHourlyLimitNone",
+    ":separateMultipleMajorReleases"
   ],
   "configMigration": true,
   "semanticCommitScope": "dependencies",
