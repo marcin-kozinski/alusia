@@ -56,7 +56,7 @@ android {
             devices {
                 phone (ManagedVirtualDevice) {
                     device = "Nexus One"
-                    apiLevel = 30
+                    apiLevel = 34
                     systemImageSource = "aosp-atd"
                 }
             }
