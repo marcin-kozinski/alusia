@@ -24,7 +24,7 @@ jobs:
       with:
         bundler-cache: true # Run "bundle install", and cache the result.
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3.4.1
+      uses: gradle/actions/setup-gradle@v3.4.2
       with:
         validate-wrappers: true
     - name: Decrypt secrets
