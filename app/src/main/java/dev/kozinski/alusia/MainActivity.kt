@@ -191,7 +191,7 @@ fun composeEmail(
     return """
         Dzień dobry,
         
-        Zgłaszam, że moja córka Alicja Kozińska (grupa Sówki) będzie nieobecna $range.
+        Zgłaszam, że moja córka Alicja Kozińska (grupa Pszczółki) będzie nieobecna $range.
         
         Pozdrawiam
         Marcin Koziński
