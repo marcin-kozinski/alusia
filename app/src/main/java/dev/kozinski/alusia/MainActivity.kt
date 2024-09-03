@@ -117,7 +117,7 @@ fun ReportAbsenceScreen(
                     enabled = true,
                     singleLine = true,
                     visualTransformation = VisualTransformation.None,
-                    interactionSource = MutableInteractionSource(),
+                    interactionSource = remember { MutableInteractionSource() },
                     label = { Text("Od – do") },
                 )
             }
