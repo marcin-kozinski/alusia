@@ -8,13 +8,5 @@
   ],
   "configMigration": true,
   "semanticCommitScope": "dependencies",
-  "timezone": "CET",
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "org.jetbrains.kotlin.android"
-      ],
-      "enabled": false
-    }
-  ]
+  "timezone": "CET"
 }
