@@ -1,7 +1,7 @@
 [versions]
 android-plugin = "8.6.0"
 androidx-activity = "1.9.2"
-androidx-navigation = "2.7.7"
+androidx-navigation = "2.8.0"
 kotlin = "2.0.20"
 
 [libraries]
