@@ -19,18 +19,9 @@ dependencyAnalysis {
             includeDependency('androidx.compose.ui:ui-text')
             includeDependency('androidx.compose.ui:ui-unit')
         }
-        bundle('kotlin') {
-            includeDependency('org.jetbrains.kotlin:kotlin-stdlib')
-        }
-        bundle('kotlin-test') {
-            includeDependency('org.jetbrains.kotlin:kotlin-test')
-        }
     }
     issues {
         all {
-            onUnusedDependencies {
-                exclude('androidx.test:runner')
-            }
             onIncorrectConfiguration {
                 exclude('org.jetbrains.kotlin:kotlin-stdlib')
             }
