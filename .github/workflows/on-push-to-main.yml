@@ -37,7 +37,7 @@ jobs:
         GRADLE_OPTS: -Dorg.gradle.daemon=false
       run: ci/release-upload.sh
     - name: Archive the release
-      uses: actions/upload-artifact@v4.6.0
+      uses: actions/upload-artifact@v4.6.1
       with:
         name: apk
         path: secrets/ps42.apk
