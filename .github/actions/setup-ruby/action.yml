@@ -1,0 +1,8 @@
+name: Set up Ruby
+description: Install Ruby through rbenv.
+runs:
+  using: composite
+  steps:
+  - name: Set up Ruby
+    run: .github/actions/setup-ruby/setup-ruby.sh
+    shell: bash

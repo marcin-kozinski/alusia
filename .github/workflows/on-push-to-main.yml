@@ -25,10 +25,10 @@ jobs:
         distribution: 'temurin'
         # Using 'temurin' speeds up the job, because this distribution is cached by the runner.
         # See: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Hosted-Tool-Cache
+    - name: Set up Homebrew
+      uses: ./.github/actions/setup-homebrew
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.159.0
-      with:
-        bundler-cache: true # Run "bundle install", and cache the result.
+      uses: ./.github/actions/setup-ruby
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4.3.1
     - name: Decrypt secrets
