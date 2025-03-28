@@ -1,0 +1,8 @@
+name: Set up Homebrew
+description: Do the necessary setup to use the Homebrew install, which comes pre-installed on GitHub runners.
+runs:
+  using: composite
+  steps:
+  - name: Set up Homebrew
+    run: .github/actions/setup-homebrew/setup-homebrew.sh
+    shell: bash
