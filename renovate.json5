@@ -4,9 +4,9 @@
     "config:recommended",
     "schedule:daily",
     ":prHourlyLimitNone",
-    ":separateMultipleMajorReleases"
+    ":separateMultipleMajorReleases",
   ],
   "configMigration": true,
   "semanticCommitScope": "dependencies",
-  "timezone": "CET"
+  "timezone": "CET",
 }
