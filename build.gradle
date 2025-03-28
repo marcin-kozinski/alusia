@@ -9,12 +9,10 @@ dependencyAnalysis {
         ignoreKtx(true)
         bundle('androidx-compose-foundation') {
             primary('androidx.compose.foundation:foundation')
-            includeDependency('androidx.compose.foundation:foundation')
             includeDependency('androidx.compose.foundation:foundation-layout')
         }
         bundle('androidx-compose-ui') {
             primary('androidx.compose.ui:ui')
-            includeDependency('androidx.compose.ui:ui')
             includeDependency('androidx.compose.ui:ui-graphics')
             includeDependency('androidx.compose.ui:ui-text')
             includeDependency('androidx.compose.ui:ui-unit')
@@ -22,9 +20,6 @@ dependencyAnalysis {
     }
     issues {
         all {
-            onIncorrectConfiguration {
-                exclude('org.jetbrains.kotlin:kotlin-stdlib')
-            }
             onAny {
                 severity('fail')
             }
