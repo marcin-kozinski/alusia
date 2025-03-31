@@ -9,9 +9,7 @@ concurrency:
 
 jobs:
   build:
-
     runs-on: macos-13
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -34,9 +32,7 @@ jobs:
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
 
   build-health:
-
     runs-on: macos-13
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -57,3 +53,13 @@ jobs:
         run: |
           echo "### Build health report" >> $GITHUB_STEP_SUMMARY
           cat "build/reports/dependency-analysis/build-health-report.txt" | tee -a $GITHUB_STEP_SUMMARY
+
+  release-tools-check:
+    runs-on: macos-13
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - name: Set up Ruby
+      uses: ./.github/actions/setup-ruby
+    - name: Check release tools
+      run: ci/release-tools-check.sh
