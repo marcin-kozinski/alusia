@@ -6,7 +6,7 @@ kotlin = "2.1.21"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.16.0" }
-androidx-appcompat-ktx = { module = "androidx.appcompat:appcompat", version = "1.7.0" }
+androidx-appcompat-ktx = { module = "androidx.appcompat:appcompat", version = "1.7.1" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version = "2025.05.01" }
