@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - name: Checkout repository
       uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -32,7 +32,7 @@ jobs:
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
 
   build-health:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout repository
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -55,7 +55,7 @@ jobs:
           cat "build/reports/dependency-analysis/build-health-report.txt" | tee -a $GITHUB_STEP_SUMMARY
 
   release-tools-check:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - name: Checkout repository
       uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
